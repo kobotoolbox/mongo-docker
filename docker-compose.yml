@@ -1,0 +1,23 @@
+version: '2.2'
+
+services:
+  mongo:
+    image: mongo:5.0
+    ports:
+      - 27017:27017
+    hostname: mongo
+    environment:
+      - MONGO_DATA=/data/db
+    env_file:
+      - /home/ubuntu/mongo-docker/kobo-docker-scripts/envfiles.txt
+    volumes:
+      - /home/ubuntu/mongo-docker/storage:/data/db
+      - /home/ubuntu/mongo-docker/logs:/srv/logs/
+      - /home/ubuntu/mongo-docker/kobo-docker-scripts:/kobo-docker-scripts
+    restart: always
+    stop_grace_period: 5m
+    command: "bash /kobo-docker-scripts/entrypoint.sh"
+    deploy:
+      resources:
+        limits:
+          memory: 64G
