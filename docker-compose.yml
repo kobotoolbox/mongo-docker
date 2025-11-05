@@ -20,6 +20,6 @@ services:
     deploy:
       resources:
         limits:
-          memory: 64G
+          memory: 96G
     logging:
       driver: local
